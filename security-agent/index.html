@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Security Agent &mdash; Autonomous AI Security Auditor</title>
+
+  <!-- Google Fonts: Public Sans & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Public Sans"', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            cyan: {
+              DEFAULT: '#0891b2',
+              hover: '#0e7490',
+              light: '#ecfeff',
+              dark: '#155e75',
+              border: '#a5f3fc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1, h2, h3, h4, .brand-title {
+      font-family: 'Public Sans', sans-serif;
+    }
+    .top-header {
+      min-height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .code-preview {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      border-radius: 12px;
+      padding: 16px;
+      overflow-x: auto;
+      border: 1px solid #1e293b;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 12px 20px -4px rgba(0,0,0,0.25);
+      display: none;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top-header">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-sky-400 flex items-center justify-center text-white shadow-sm font-black text-lg">
+          🛡️
+        </div>
+        <div>
+          <div class="font-extrabold text-sm text-slate-900 tracking-tight leading-tight">floatingAgent 🛡️</div>
+          <div class="text-[11px] text-cyan-600 font-semibold">Autonomous Web &amp; Firebase Hardening</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-slate-500 hidden sm:inline">Built for Google Antigravity &bull; MIT License</span>
+      <a href="https://github.com/Trundle-Tech/floatingAgent" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition shadow-sm">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="max-w-5xl mx-auto w-full px-4 sm:px-6 pt-12 pb-8 text-center">
+    <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4">
+      <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+      Autonomous Security Auditor &bull; Zero Open Rules &bull; Zero PII Leaks
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight max-w-3xl mx-auto leading-tight mb-4">
+      Automated Security Auditing &amp; Hardening for Firebase Web Apps
+    </h1>
+    <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+      Drop this autonomous agent skill into Google Antigravity to red-team HTTP headers, audit Firestore &amp; Storage rules, eliminate fail-open auth traps, and purge leaked PII from static HTML bundles in minutes.
+    </p>
+
+    <!-- Key Stats & Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-bold mb-8">
+      <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Antigravity Ready (@security-agent)
+      </span>
+      <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Firestore &amp; Storage RBAC
+      </span>
+      <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Zero PII Static Sanitizer
+      </span>
+      <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        100/100 Benchmark Verified
+      </span>
+    </div>
+
+    <!-- Main Action Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+      <a href="downloads/security-agent.zip" download="security-agent.zip" class="w-full sm:w-auto flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-3 px-5 rounded-xl flex items-center justify-center gap-2 shadow-sm transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download Agent (.zip)
+      </a>
+      <button onclick="copyAuditorPrompt()" class="w-full sm:w-auto flex-1 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs py-3 px-5 rounded-xl border border-slate-300 flex items-center justify-center gap-2 transition">
+        <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+        Copy 1-Shot Prompt
+      </button>
+    </div>
+  </section>
+
+  <!-- Code Preview Box -->
+  <main class="max-w-4xl mx-auto w-full px-4 sm:px-6 py-4 flex-1">
+    <div class="code-preview relative group mb-12">
+      <div class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-2 flex justify-between">
+        <span>Antigravity One-Shot Execution Prompt</span>
+        <button onclick="copyAuditorPrompt()" class="text-amber-400 hover:underline">Copy Prompt</button>
+      </div>
+      <div class="text-slate-300 font-mono text-[12px] whitespace-pre-wrap leading-relaxed select-all">@security-agent
+
+Run a full security vulnerability audit on my web application:
+Target: [ENTER YOUR WEB APP URL, e.g. https://my-app.web.app]
+
+Audit Scope:
+1. HTTP Security Headers: Content-Security-Policy, X-Frame-Options, X-Content-Type-Options: nosniff, Cache-Control.
+2. Firestore Security Rules: Verify zero wildcard allow rules. Enforce collection-level RBAC & schema constraints.
+3. Firebase Storage Rules: Audit bucket paths, enforce verified auth tokens, max file size & MIME type limits.
+4. Client-Side Security: Red-team against client-side bypasses (window.location redirect traps).
+5. Static Bundle PII Leaks: Scan public/ and dist/ to ensure zero customer, private, or database records are baked in.
+6. Verification: Output a clean remediation report with 0 critical vulnerabilities.</div>
+    </div>
+
+    <!-- Interactive Live Security Checklist -->
+    <section class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 mb-12 shadow-lg">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">15 Checkpoints</span>
+          <h2 class="text-xl sm:text-2xl font-black tracking-tight text-white mt-1">
+            Enterprise Security Audit Benchmark
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-xs font-bold text-emerald-300">Automated Remediation Ready</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium">
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Content-Security-Policy (CSP) Active</div>
+            <div class="text-slate-400 leading-relaxed">Default origin lockdown preventing arbitrary external script injection.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Clickjacking Defense: X-Frame-Options: SAMEORIGIN</div>
+            <div class="text-slate-400 leading-relaxed">Guards dashboards, portals, and authenticated routes against iframe clickjacking.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Cloud Firestore Hardened RBAC</div>
+            <div class="text-slate-400 leading-relaxed">Zero wildcard open rules. Authenticated users can only read authorized resources; admins restricted to verified roles.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Firebase Storage MIME &amp; Size Guard</div>
+            <div class="text-slate-400 leading-relaxed">Uploads strictly restricted to verified owner UIDs, document MIME types, and file size bounds.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Zero PII Inlined into Static Bundles</div>
+            <div class="text-slate-400 leading-relaxed">Build pipeline sanitizes all HTML/JS assets before edge sync. Zero private records leaked.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 flex items-start gap-3">
+          <span class="text-emerald-400 text-base">✓</span>
+          <div>
+            <div class="font-bold text-white mb-0.5">Corporate Domain Restriction &amp; Token Auth</div>
+            <div class="text-slate-400 leading-relaxed">Both client-side authentication and backend Firestore rules enforce corporate domain ownership and verified claims.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standalone CLI Commands Section -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 mb-12 shadow-xs">
+      <h3 class="text-lg font-bold text-slate-900 mb-2">Run as Standalone Terminal Scripts</h3>
+      <p class="text-slate-600 text-xs sm:text-sm mb-4">
+        You can also run the bundled scripts directly from your shell without needing an LLM:
+      </p>
+      <div class="space-y-3 font-mono text-xs">
+        <div class="bg-slate-900 text-slate-100 p-3 rounded-lg flex items-center justify-between">
+          <span>python3 scripts/audit_headers.py https://my-app.web.app</span>
+          <span class="text-slate-400 text-[10px]">Header Audit</span>
+        </div>
+        <div class="bg-slate-900 text-slate-100 p-3 rounded-lg flex items-center justify-between">
+          <span>python3 scripts/audit_bundle_pii.py public/</span>
+          <span class="text-slate-400 text-[10px]">PII Scanner</span>
+        </div>
+        <div class="bg-slate-900 text-slate-100 p-3 rounded-lg flex items-center justify-between">
+          <span>bash scripts/test_rules.sh</span>
+          <span class="text-slate-400 text-[10px]">Dry-Run Rules</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>Open source community agent for Google Antigravity &bull; MIT License.</div>
+      <div class="flex items-center gap-4">
+        <a href="downloads/security-agent.zip" class="hover:text-slate-800 transition">Download (.zip)</a>
+        <a href="https://github.com/Trundle-Tech/floatingAgent" target="_blank" rel="noopener" class="hover:text-slate-800 transition">GitHub (floatingAgent)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Prompt copied to clipboard!</div>
+
+  <script>
+    const AUDITOR_PROMPT = `@security-agent
+
+Run a full security vulnerability audit on my web application:
+Target: [ENTER YOUR WEB APP URL, e.g. https://my-app.web.app]
+
+Audit Scope:
+1. HTTP Security Headers: Content-Security-Policy, X-Frame-Options, X-Content-Type-Options: nosniff, Cache-Control.
+2. Firestore Security Rules: Verify zero wildcard allow rules. Enforce collection-level RBAC & schema constraints.
+3. Firebase Storage Rules: Audit bucket paths, enforce verified auth tokens, max file size & MIME type limits.
+4. Client-Side Security: Red-team against client-side bypasses (window.location redirect traps).
+5. Static Bundle PII Leaks: Scan public/ and dist/ to ensure zero customer, private, or database records are baked in.
+6. Verification: Output a clean remediation report with 0 critical vulnerabilities.`;
+
+    function copyAuditorPrompt() {
+      navigator.clipboard.writeText(AUDITOR_PROMPT).then(() => {
+        showToast("🛡️ Security Agent Master Prompt copied to clipboard!");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

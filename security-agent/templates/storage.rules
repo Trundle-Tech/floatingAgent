@@ -1,0 +1,32 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function isValidDocument() {
+      return request.resource.size < 15 * 1024 * 1024 // 15MB limit
+          && (request.resource.contentType.matches('application/pdf')
+           || request.resource.contentType.matches('application/msword')
+           || request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+           || request.resource.contentType.matches('image/.*'));
+    }
+
+    // User document vault: Uploads locked to verified UID, MIME-type, and size bounds
+    match /users/{userId}/{fileName} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId) && isValidDocument();
+    }
+
+    // Default deny-all catch-all
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
